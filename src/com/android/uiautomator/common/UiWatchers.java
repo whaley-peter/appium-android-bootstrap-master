@@ -97,13 +97,13 @@ public class UiWatchers {
    * your own watchers and handle error logging properly for your type of tests.
    */
   public void registerAnrAndCrashWatchers() {
-
+    // 增加vivo启动过程中弹框处理
     UiDevice.getInstance().registerWatcher("vivolaunch", new UiWatcher() {
       @Override
       public boolean checkForCondition() {
 
         final UiObject alert = new UiObject(
-            new UiSelector().resourceId("android:id/button1"));
+            new UiSelector().resourceId("android:id/button1").text("允许"));
         if (alert.exists()) {
           try {
             alert.clickAndWaitForNewWindow();
@@ -112,9 +112,7 @@ public class UiWatchers {
           }
           return true;
         }
-
         return false;
-
       }
     });
 
